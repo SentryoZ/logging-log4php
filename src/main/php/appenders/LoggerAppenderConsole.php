@@ -64,7 +64,8 @@
 	public function close() {
 		if($this->closed != true) {
 			if (is_resource($this->fp) && $this->layout !== null) {
-				fwrite($this->fp, $this->layout->getFooter());
+                $footer = $this->layout->getFooter();
+				fwrite($this->fp, !$footer ? "" : $footer);
 				fclose($this->fp);
 			}
 			$this->closed = true;
